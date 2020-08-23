@@ -1,15 +1,18 @@
 Program = Statement *
 Statement = _? s:(FunctionDeclaration/Operation/BlankLine) ','? _* '\n' {return s}
-Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put / Listen / Stdout / Continue / Break / PoeticString
-_ = ((' ' / '\t')+) / Comment
-Comment = 'lumos' _ test* _* test1* //{return null}
-test = [a-zA-Z0-9]
-test1 =  [!/@#$%^&*()-_+=.<>,]
+Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put / Listen / Say / Continue / Break / PoeticString
+whitespace= [ \t]
+_           = (whitespace/comment)+
+comment     = 'lumos' _ (all_char / all_symbol)* //{return null}
+all_char = [a-zA-Z0-9 ]
+all_symbol = [!/@#$%^&*()-_+=.<>,]
+
 Variable =
-	(n:(CommonVariable / ProperVariable) {return {t: 'Variable', n}})
+	(n:(CommonVariable / ProperVariable/simple_variable) {return {t: 'Variable', n}})
 	/ Pronoun {return {t: 'Pronoun'}}
+simple_variable= [a-zA-Z]+
 CommonVariable = p:('the'i/'my'i/'your'i) _ v:$([a-z]+) {return p+v}
-ProperWord = $([A-Z][A-Za-z]+)
+ProperWord = ([A-Z][A-Za-z]+)
 ProperVariable = $(ProperWord _ ProperVariable) / $ProperWord
 Pronoun = (
 	'it'i
@@ -21,9 +24,9 @@ Pronoun = (
 TypeLiteral = v:TypeLiteralValue { return {t: 'Literal', v} }
 TypeLiteralValue =
 	('nothing'/'nobody'/'nowhere'/'empty'/'gone') {return 0} // TODO null?
-	/ ('wizard') {return true}
-    / ('muggle') {return false}
-    / 'invisible' { return undefined}
+	/ ('true'/'right'/'yes'/'ok') {return true}
+    / ('false'/'wrong'/'no'/'lies') {return false}
+    / 'mysterious' { return undefined}
 
 String = '"' v:$[^"]+ '"'
 	{ return {t: 'Literal', v}}
@@ -56,7 +59,7 @@ ArithmeticOperator =
 	('reducio'/'-') {return '-'}
 	/ ('engorgio'/'+') {return '+'}
 	/ ('gemino'/'*') {return '*'}
-	/ ('sectumsepra' / '/') {return '/'}
+	/ ('sectumsepra'/'/') {return '/'}
 
 Comparison = l:SimpleExpression _ b:BoolCheck c:Comparator? r:SimpleExpression
 	{ return {t: 'Comparison', l, r, b, c} }
@@ -71,7 +74,7 @@ Comparator =
 
 Listen = 'Listen' _ 'to' _ v:Variable
 	{return {t:'Listen', v}}
-Stdout = ('Spell') _ e:Expression
+Say = ('Say'/'Shout'/'Whisper'/'Scream') _ e:Expression
 	{return {t:'Say', e}}
 
 If = 'If' _ e:Expression
