@@ -10,7 +10,7 @@ all_symbol = [!/@#$%^&*()-_+=.<>,]
 Variable =
 	(n:(CommonVariable / ProperVariable/simple_variable) {return {t: 'Variable', n}})
 	/ Pronoun {return {t: 'Pronoun'}}
-simple_variable= [a-zA-Z]+
+simple_variable= $[a-zA-Z]+
 CommonVariable = p:('the'i/'my'i/'your'i) _ v:$([a-z]+) {return p+v}
 ProperWord = ([A-Z][A-Za-z]+)
 ProperVariable = $(ProperWord _ ProperVariable) / $ProperWord
@@ -23,10 +23,10 @@ Pronoun = (
 
 TypeLiteral = v:TypeLiteralValue { return {t: 'Literal', v} }
 TypeLiteralValue =
-	('nothing'/'nobody'/'nowhere'/'empty'/'gone') {return 0} // TODO null?
-	/ ('true'/'right'/'yes'/'ok') {return true}
-    / ('false'/'wrong'/'no'/'lies') {return false}
-    / 'mysterious' { return undefined}
+	('nothing'/'nox') {return 0} // TODO null?
+	/ ('true'/'wizard') {return true}
+    / ('false'/'muggle') {return false}
+    / 'invisible' { return undefined}
 
 String = '"' v:$[^"]+ '"'
 	{ return {t: 'Literal', v}}
@@ -35,9 +35,9 @@ Number = n:$([0-9]+ ('.' [0-9]+)?)
 	{ return {t: 'Literal', v: parseFloat(n)} }
 
 ArithmeticStatement = BuildUp / KnockDown
-BuildUp = 'Build' _ v:Variable _ 'up'
+BuildUp = 'ascendio' _ v:Variable
 	{ return {t: 'Rement', v: v, o: '++'} }
-KnockDown = 'Knock' _ v:Variable _ 'down'
+KnockDown = 'descendio' _ v:Variable 
 	{ return {t: 'Rement', v: v, o: '--'} }
 
 PoeticString = v:Variable _ 'says' ' ' t:$[^\n]*
@@ -67,14 +67,14 @@ BoolCheck =
 	(('is'_'not'_)/"ain't"_) { return false }
 	/ 'is'_ { return true }
 Comparator =
-	('higher'/'greater'/'bigger'/'stronger')_'than'_ { return 'gt' }
-    / ('lower'/'less'/'smaller'/'weaker')_'than'_ { return 'lt' }
+	('ahead')_'of'_ { return 'gt' }
+    / ('behind') { return 'lt' }
     / 'as'_('high'/'great'/'big'/'strong')_'as'_ {return 'ge'}
     / 'as'_('low'/'little'/'small'/'weak')_'as'_ {return 'le'}
 
 Listen = 'Listen' _ 'to' _ v:Variable
 	{return {t:'Listen', v}}
-Say = ('Say'/'Shout'/'Whisper'/'Scream') _ e:Expression
+Say = ('Spell') _ e:Expression
 	{return {t:'Say', e}}
 
 If = 'If' _ e:Expression
@@ -84,7 +84,7 @@ Else = 'Else' {return {t: 'Else'}}
 Loop = c:('While'/'Until') _ e:Expression
 	{ return {t: 'Loop', c, e} }
 Continue = ('Continue' / ('Take'_'it'_'to'_'the'_'top')) {return {t: 'Continue'}}
-Break = ('Break' / ('Break'_'it'_'down')) {return {t: 'Break'}}
+Break = ('Break' / 'immobulous') {return {t: 'Break'}}
 
 FunctionDeclaration = n:Variable _ 'takes' _ a:FunctionDeclarationArguments
 	{ return {t: 'FunctionDeclaration', n, a: a.map(a => a.n)} }
