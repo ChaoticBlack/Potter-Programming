@@ -3,7 +3,7 @@ Statement = _? s:(FunctionDeclaration/Operation/BlankLine) ','? _* '\n' {return 
 Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put / Listen / Say / Continue / Break / PoeticString
 whitespace= [ \t]
 _           = (whitespace/comment)+
-comment     = 'lumos' _ (all_char / all_symbol)* //{return null}
+comment     = 'lumos'i _ (all_char / all_symbol)* //{return null}
 all_char = [a-zA-Z0-9 ]
 all_symbol = [!/@#$%^&*()-_+=.<>,]
 
@@ -23,10 +23,10 @@ Pronoun = (
 
 TypeLiteral = v:TypeLiteralValue { return {t: 'Literal', v} }
 TypeLiteralValue =
-	('nothing'/'nox') {return 0} // TODO null?
-	/ ('true'/'wizard') {return true}
-    / ('false'/'muggle') {return false}
-    / 'invisible' { return undefined}
+	('nothing'i/'nox'i) {return 0} // TODO null?
+	/ ('true'i/'wizard'i) {return true}
+    / ('false'i/'muggle'i) {return false}
+    / 'invisible'i { return undefined}
 
 String = '"' v:$[^"]+ '"'
 	{ return {t: 'Literal', v}}
@@ -35,9 +35,9 @@ Number = n:$([0-9]+ ('.' [0-9]+)?)
 	{ return {t: 'Literal', v: parseFloat(n)} }
 
 ArithmeticStatement = BuildUp / KnockDown
-BuildUp = 'ascendio' _ v:Variable
+BuildUp = 'ascendio'i _ v:Variable
 	{ return {t: 'Rement', v: v, o: '++'} }
-KnockDown = 'descendio' _ v:Variable 
+KnockDown = 'descendio'i _ v:Variable 
 	{ return {t: 'Rement', v: v, o: '--'} }
 
 PoeticString = v:Variable _ 'says' ' ' t:$[^\n]*
@@ -56,51 +56,51 @@ ArithmeticExpression =
 	r:SimpleExpression
 	{ return {t: 'Arithmetic', l, o, r} }
 ArithmeticOperator =
-	('reducio'/'-') {return '-'}
-	/ ('engorgio'/'+') {return '+'}
-	/ ('gemino'/'*') {return '*'}
-	/ ('sectumsepra'/'/') {return '/'}
+	('reducio'i/'-') {return '-'}
+	/ ('engorgio'i/'+') {return '+'}
+	/ ('gemino'i/'*') {return '*'}
+	/ ('sectumsepra'i/'/') {return '/'}
 
 Comparison = l:SimpleExpression _ b:BoolCheck c:Comparator? r:SimpleExpression
 	{ return {t: 'Comparison', l, r, b, c} }
 BoolCheck =
-	(('is'_'not'_)/"ain't"_) { return false }
+	(('is'i_'not'i_)/"ain't"i_) { return false }
 	/ 'is'_ { return true }
 Comparator =
-	('ahead')_'of'_ { return 'gt' }
+	('ahead'i)_'of'i_ { return 'gt' }
     / ('behind') { return 'lt' }
-    / 'as'_('high'/'great'/'big'/'strong')_'as'_ {return 'ge'}
-    / 'as'_('low'/'little'/'small'/'weak')_'as'_ {return 'le'}
+    / 'as'i_('high'i/'great'i/'big'i/'strong'i)_'as'i_ {return 'ge'}
+    / 'as'i_('low'i/'little'i/'small'i/'weak'i)_'as'i_ {return 'le'}
 
-Listen = 'Listen' _ 'to' _ v:Variable
+Listen = 'Listen'i _ 'to'i _ v:Variable
 	{return {t:'Listen', v}}
-Say = ('Spell') _ e:Expression
+Say = ('Spell'i) _ e:Expression
 	{return {t:'Say', e}}
 
-If = 'If' _ e:Expression
+If = 'If'i _ e:Expression
 	{ return {t: 'If', e} }
-Else = 'Else' {return {t: 'Else'}}
+Else = 'Else'i {return {t: 'Else'}}
 
-Loop = c:('While'/'Until') _ e:Expression
+Loop = c:('While'i/'Until'i) _ e:Expression
 	{ return {t: 'Loop', c, e} }
-Continue = ('Continue' / ('Take'_'it'_'to'_'the'_'top')) {return {t: 'Continue'}}
-Break = ('Break' / 'immobulous') {return {t: 'Break'}}
+Continue = ('Continue'i) {return {t: 'Continue'}}
+Break = ('Break'i / 'immobulous'i) {return {t: 'Break'}}
 
-FunctionDeclaration = n:Variable _ 'takes' _ a:FunctionDeclarationArguments
+FunctionDeclaration = n:Variable _ 'takes'i _ a:FunctionDeclarationArguments
 	{ return {t: 'FunctionDeclaration', n, a: a.map(a => a.n)} }
 FunctionDeclarationArguments = 
-	a:Variable (_'and'_ / _?','_?) b:FunctionDeclarationArguments { return [a].concat(b) }
+	a:Variable (_'and'i_ / _?','_?) b:FunctionDeclarationArguments { return [a].concat(b) }
     / a:Variable { return [a] }
-GiveBack = 'Give back' _ e:Expression
+GiveBack = 'Give back'i _ e:Expression
 	{ return {t: 'GiveBack', e} }
 BlankLine = '' {return {t: 'BlankLine'}}
 
 
-FunctionCall = f:Variable _ 'taking' _ a:FunctionCallArguments
+FunctionCall = f:Variable _ 'taking'i _ a:FunctionCallArguments
 	{ return {t: 'FunctionCall', f, a} }
 // TODO 'and' is overloaded, so can't use full Expression syntax
 FunctionCallArguments = 
-	a:SimpleExpression (_'and'_ / _?','_?) b:FunctionCallArguments { return [a].concat(b) }
+	a:SimpleExpression (_'and'i_ / _?','_?) b:FunctionCallArguments { return [a].concat(b) }
     / a:SimpleExpression { return [a] }
 
 
@@ -111,13 +111,16 @@ SimpleExpression = FunctionCall / TypeLiteral / Variable / Number / String / Poe
 BooleanOperation =
 	(
     	l:(Comparison / SimpleExpression)
-        _ b:('and'/'or') _
+        _ b:('and'i/'or'i) _
         r:Expression
         { return {t: 'BooleanOperation', l, b, r} }
     )
     / l: (Comparison / SimpleExpression) { return l }
 
-Set = v:Variable _ ('is'/'was'/'were') _ e:Expression
+Set = v:Variable _ ('is'i/'was'i/'were'i) _ e:Expression
 	{ return {t: 'Set', v: v, e} }
-Put = 'Put' _ e:Expression _ 'into' _ v:Variable
+int_assignment = e:Expression _ 'points to'i _ v:Variable  
+	{return{t: 'Set', v: v, e} }
+int = [0-9]+    
+Put = e:Expression _ 'points to'i _ v:Variable
 	{ return {t: 'Set', v: v, e} }
