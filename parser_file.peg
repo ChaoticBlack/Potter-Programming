@@ -9,23 +9,23 @@ all_symbol = [!/@#$%^&*()-_+=.<>,]
 
 Variable =
 	(n:(CommonVariable / ProperVariable/simple_variable) {return {t: 'Variable', n}})
-	/ Pronoun {return {t: 'Pronoun'}}
+//	/ Pronoun {return {t: 'Pronoun'}}
 simple_variable= $[a-zA-Z]+
 CommonVariable = p:('the'i/'my'i/'your'i) _ v:$([a-z]+) {return p+v}
 ProperWord = ([A-Z][A-Za-z]+)
 ProperVariable = $(ProperWord _ ProperVariable) / $ProperWord
-Pronoun = (
-	'it'i
-	/'he'i/'she'i/'him'i/'her'i
-	/'them'i/'they'i
-	/'ze'i/'hir'i/'zie'i/'zir'i/'xe'i/'xem'i/'ve'i/'ver'i
-)
+//Pronoun = (
+//	'it'i
+//	/'he'i/'she'i/'him'i/'her'i
+//	/'them'i/'they'i
+//	/'ze'i/'hir'i/'zie'i/'zir'i/'xe'i/'xem'i/'ve'i/'ver'i
+//)
 
 TypeLiteral = v:TypeLiteralValue { return {t: 'Literal', v} }
 TypeLiteralValue =
 	('nothing'i/'nox'i) {return 0} // TODO null?
-	/ ('true'i/'wizard'i) {return true}
-    / ('false'i/'muggle'i) {return false}
+	/ ('true'i/'a wizard'i) {return true}
+    / ('false'i/'a muggle'i) {return false}
     / 'invisible'i { return undefined}
 
 String = '"' v:$[^"]+ '"'
@@ -117,7 +117,7 @@ BooleanOperation =
     )
     / l: (Comparison / SimpleExpression) { return l }
 
-Set = v:Variable _ ('is'i/'was'i/'were'i) _ e:Expression
+Set = v:Variable _ ('is'i/'was'i/'were'i/ '=') _ e:Expression
 	{ return {t: 'Set', v: v, e} }
 int_assignment = e:Expression _ 'points to'i _ v:Variable  
 	{return{t: 'Set', v: v, e} }
