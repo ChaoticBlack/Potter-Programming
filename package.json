@@ -1,0 +1,33 @@
+{
+  "name": "rockstar-js",
+  "version": "0.0.1",
+  "description": "JavaScript transpiler for the esoteric language 'Rockstar'",
+  "homepage": "https://github.com/wolfgang42/rockstar-js",
+  "bugs": "https://github.com/wolfgang42/rockstar-js/issues",
+  "repository": "github:wolfgang42/rockstar-js",
+  "license": "MIT",
+  "author": "Wolfgang Faust",
+  "main": "src/rockstar.js",
+  "bin": "./rockstar",
+  "directories": {
+    "lib": "src/",
+    "example": "examples/"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "child_process": "^1.0.2",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "readline-specific": "^1.0.4",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "pegjs": "^0.10.0"
+  },
+  "scripts": {
+    "build": "pegjs src/rockstar-parser.peg",
+    "test": "mocha",
+    "prepublish": "npm run build"
+  }
+}
