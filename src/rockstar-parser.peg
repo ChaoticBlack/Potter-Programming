@@ -96,7 +96,7 @@ GiveBack = ('Give back'i/'return') _ e:Expression
 BlankLine = '' {return {t: 'BlankLine'}}
 
 
-FunctionCall = f:Variable _ 'taking'i _ a:FunctionCallArguments
+FunctionCall = 'accio'_ f:Variable _ '('  a:FunctionCallArguments ')'
 	{ return {t: 'FunctionCall', f, a} }
 
 FunctionCallArguments = 
@@ -122,3 +122,4 @@ int_assignment = e:Expression _ 'points to'i _ v:Variable
 int = [0-9]+    
 Put = e:Expression _ 'points to'i _ v:Variable
 	{ return {t: 'Set', v: v, e} }
+	
