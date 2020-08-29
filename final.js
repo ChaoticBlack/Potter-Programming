@@ -78,7 +78,7 @@ app.post("/code",function(req,res){
     console.log(e);
     output.output1=e;
     flag=1;
-    res.redirect("/");
+    res.redirect("/code");
 
    	//process.exit(0);
 
@@ -108,7 +108,7 @@ app.post("/code",function(req,res){
      output.output1=i;
        console.log(`child process exited with code ${code}`);
        if(flag==0)
-         res.redirect("/");
+         res.redirect("/code");
    });
 });
 
