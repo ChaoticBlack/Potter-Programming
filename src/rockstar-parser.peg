@@ -9,23 +9,23 @@ all_symbol = [!/@#$%^&*()-_+=.<>,]
 
 Variable =
 	(n:(CommonVariable / ProperVariable/simple_variable) {return {t: 'Variable', n}})
-//	/ Pronoun {return {t: 'Pronoun'}}
+	/ Pronoun {return {t: 'Pronoun'}}
 simple_variable= $[a-zA-Z]+
 CommonVariable = p:('the'i/'my'i/'your'i) _ v:$([a-z]+) {return p+v}
 ProperWord = ([A-Z][A-Za-z]+)
 ProperVariable = $(ProperWord _ ProperVariable) / $ProperWord
-//Pronoun = (
-//	'it'i
-//	/'he'i/'she'i/'him'i/'her'i
-//	/'them'i/'they'i
-//	/'ze'i/'hir'i/'zie'i/'zir'i/'xe'i/'xem'i/'ve'i/'ver'i
-//)
+Pronoun = (
+	'it'i
+	/'he'i/'she'i/'him'i/'her'i
+	/'them'i/'they'i
+	/'ze'i/'hir'i/'zie'i/'zir'i/'xe'i/'xem'i/'ve'i/'ver'i
+)
 
 TypeLiteral = v:TypeLiteralValue { return {t: 'Literal', v} }
 TypeLiteralValue =
 	('nothing'i/'nox'i) {return 0} // TODO null?
-	/ ('true'i/'a wizard'i) {return true}
-    / ('false'i/'a muggle'i) {return false}
+	/ ('true'i/'wizard'i) {return true}
+    / ('false'i/'muggle'i) {return false}
     / 'invisible'i { return undefined}
 
 String = '"' v:$[^"]+ '"'
@@ -35,9 +35,9 @@ Number = n:$([0-9]+ ('.' [0-9]+)?)
 	{ return {t: 'Literal', v: parseFloat(n)} }
 
 ArithmeticStatement = BuildUp / KnockDown
-BuildUp = ('++'/'ascendio'i) _ v:Variable
+BuildUp = 'ascendio'i _ v:Variable
 	{ return {t: 'Rement', v: v, o: '++'} }
-KnockDown = '--'/'descendio'i _ v:Variable 
+KnockDown = 'descendio'i _ v:Variable
 	{ return {t: 'Rement', v: v, o: '--'} }
 
 PoeticString = v:Variable _ 'says' ' ' t:$[^\n]*
@@ -64,17 +64,17 @@ ArithmeticOperator =
 Comparison = l:SimpleExpression _ b:BoolCheck c:Comparator? r:SimpleExpression
 	{ return {t: 'Comparison', l, r, b, c} }
 BoolCheck =
-	(('is'i_'not'i_)/"ain't"i_/ '!=') { return false }
+	(('is'i_'not'i_)/"ain't"i_) { return false }
 	/ 'is'_ { return true }
 Comparator =
-	(('ahead'i)_'of'i_/'>') { return 'gt' }
-    / ('behind'/'<') { return 'lt' }
-    / ('as'i_('high'i/'great'i/'big'i/'strong'i)_'as'i_/'>=') {return 'ge'}
-    / ('as'i_('low'i/'little'i/'small'i/'weak'i)_'as'i_/'<=') {return 'le'}
+	('ahead'i)_'of'i_ { return 'gt' }
+    / ('behind') { return 'lt' }
+    / 'as'i_('high'i/'great'i/'big'i/'strong'i)_'as'i_ {return 'ge'}
+    / 'as'i_('low'i/'little'i/'small'i/'weak'i)_'as'i_ {return 'le'}
 
 Listen = 'Listen'i _ 'to'i _ v:Variable
 	{return {t:'Listen', v}}
-Say = ('Spell'i/'print'i) _ e:Expression
+Say = ('Spell'i) _ e:Expression
 	{return {t:'Say', e}}
 
 If = 'If'i _ e:Expression
@@ -86,24 +86,26 @@ Loop = c:('While'i/'Until'i) _ e:Expression
 Continue = ('Continue'i) {return {t: 'Continue'}}
 Break = ('Break'i / 'immobulous'i) {return {t: 'Break'}}
 
-FunctionDeclaration =('horcrux'i/'def') _ n:Variable _ 'takes'i _ a:FunctionDeclarationArguments
+FunctionDeclaration = n:Variable _ 'takes'i _ a:FunctionDeclarationArguments
 	{ return {t: 'FunctionDeclaration', n, a: a.map(a => a.n)} }
-FunctionDeclarationArguments = 
+FunctionDeclarationArguments =
 	a:Variable (_'and'i_ / _?','_?) b:FunctionDeclarationArguments { return [a].concat(b) }
     / a:Variable { return [a] }
-GiveBack = ('Give back'i/'return') _ e:Expression
+GiveBack = 'Give back'i _ e:Expression
 	{ return {t: 'GiveBack', e} }
 BlankLine = '' {return {t: 'BlankLine'}}
 
 
-FunctionCall = 'accio'_ f:Variable _ '('  a:FunctionCallArguments ')'
+FunctionCall = f:Variable _ 'taking'i _ a:FunctionCallArguments
 	{ return {t: 'FunctionCall', f, a} }
-
-FunctionCallArguments = 
+// TODO 'and' is overloaded, so can't use full Expression syntax
+FunctionCallArguments =
 	a:SimpleExpression (_'and'i_ / _?','_?) b:FunctionCallArguments { return [a].concat(b) }
     / a:SimpleExpression { return [a] }
 
 
+///////////////////////
+// TODO Everything below here is never explicitly defined in the spec
 Expression = ArithmeticExpression / BooleanOperation
 SimpleExpression = FunctionCall / TypeLiteral / Variable / Number / String / PoeticNumber
 BooleanOperation =
@@ -115,11 +117,10 @@ BooleanOperation =
     )
     / l: (Comparison / SimpleExpression) { return l }
 
-Set = v:Variable _ ('is'i/'was'i/'were'i/ '=') _ e:Expression
+Set = v:Variable _ ('is'i/'was'i/'were'i) _ e:Expression
 	{ return {t: 'Set', v: v, e} }
-int_assignment = e:Expression _ 'points to'i _ v:Variable  
+int_assignment = e:Expression _ 'points to'i _ v:Variable
 	{return{t: 'Set', v: v, e} }
-int = [0-9]+    
+int = [0-9]+
 Put = e:Expression _ 'points to'i _ v:Variable
 	{ return {t: 'Set', v: v, e} }
-	

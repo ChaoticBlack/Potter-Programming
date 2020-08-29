@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:200');
+body
+{
+  background-color: #100e17;
+  color:white;
+  text-align: center;
+  min-height:100%; padding:0; margin:0; position:relative;
+   font-family: 'Rowdies', cursive;
+   background-image: url('https://wallpapercave.com/wp/sR5I9K3.jpg');
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+  /*opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+    /* background-size: cover; */
+
+  /* http://images.ctfassets.net/usf1vwtuqyxm/34MfgPWZTNTvOalEuE93Vd/f0e1d337d432019cf389ec689a05ff3f/Discover-Your-House_Ravenclaw.jpg */
+}
+html{ height:100%; }
+.title1
+{
+ /* text-align: center; */
+ margin-top:  1rem;
+ font-family: 'Fugaz One', cursive;
+ margin-bottom: 1rem;
+ font-size: 4rem;
+ /* font-weight: 900; */
+}
+.home1
+{
+  border: 0;
+  margin: 0;
+}
+
+
+
+
+
+
+/* html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: #1D1F20;
+} */
+p
+{
+  font-family: 'Satisfy', cursive;
+  font-size: 2rem;
+}
+h1 span{
+    display: inline-block;
+    animation: animate 1s linear forwards;
+}
+@keyframes animate{
+    0%{
+        opacity: 0;
+        transform: rotateY(90deg);
+        filter: blur(10px)
+    }
+    100%{
+        opacity: 1;
+        transform: rotateY(0deg);
+        filter:blur(0)
+    }
+}
+h1 span:nth-child(1){
+    /* color:#186aa0; */
+    opacity: 0;
+    animation-delay: 1s;
+}
+h1 span:nth-child(2){
+    opacity: 0;
+    animation-delay: 1.5s;
+}
+h1 span:nth-child(3){
+    opacity: 0;
+    animation-delay: 1.75s;
+}
+h1 span:nth-child(4){
+    opacity: 0;
+    animation-delay: 2s;
+}
+h1 span:nth-child(5){
+    /* color:#186aa0; */
+    opacity: 0;
+    animation-delay: 2.5s;
+}
+h1 span:nth-child(6){
+    opacity: 0;
+    animation-delay: 2.75s;
+}
+h1 span:nth-child(7){
+    opacity: 0;
+    animation-delay: 3s;
+}
+h1 span:nth-child(8){
+    opacity: 0;
+    animation-delay: 3.5s;
+}
+h1 span:nth-child(9){
+    opacity: 0;
+    animation-delay: 3.75s;
+}
+h1 span:nth-child(10){
+    opacity: 0;
+    animation-delay: 4s;
+}
+
+h1 span:nth-child(11){
+    opacity: 0;
+    animation-delay: 4.5s;
+}
+
+h1 span:nth-child(12){
+    opacity: 0;
+    animation-delay: 4.25s;
+}
+.text
+{
+  margin-top: 5rem;
+}
+
+.footer-padding {
+	padding-bottom: 60px;
+}
+
+.footer {
+	position: relative;
+	text-align: center;
+	bottom: 0;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+	/* width: 100%;
+	height: 60px; */
+}

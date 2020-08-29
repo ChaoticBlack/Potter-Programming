@@ -9,12 +9,19 @@ const rockstar = require('./src/rockstar');
 const { spawn } = require("child_process");
 var flag=0;
 app.set('view engine', 'ejs');
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 // Required to support reading from stdin
 const readlineSync = require('readline-sync');
 var x="hi";
 const output={
   output1:null
+};
+const input={
+  input1:null
+};
+const cin={
+  cin1:null
 };
 
 app.listen(3000, function() {
@@ -23,14 +30,19 @@ app.listen(3000, function() {
 
 
 app.get('/',function(req,res){
-  res.render('index', {output: output})
+  res.render('home')
 });
+app.get('/code',function(req,res){
+  res.render('index', {output: output, input: input, cin:cin})
 
-app.post("/",function(req,res){
+});
+app.post("/code",function(req,res){
   flag=0;
   //console.log(req.body);
   var title = req.body.postTitle1
   var title1 = req.body.postTitle
+  input.input1=title1
+  cin.cin1=title
   //console.log(title1.length)
   title1 = title1.replace(/(\r\n|\n|\r)/gm, "\n");
   //title1=title1+"\n"
@@ -74,7 +86,7 @@ app.post("/",function(req,res){
 
 
    const ls = spawn("node",["temp.js"] );
-   var i="hi\n";
+   var i="";
    ls.stdout.on("data", data => {
        console.log(`${data}`);
       i=i+`${data}`
@@ -82,6 +94,7 @@ app.post("/",function(req,res){
 
    ls.stderr.on("data", data => {
        console.log(`stderr: ${data}`);
+       // i=i+`${data}`
    });
 
    ls.on('error', (error) => {
