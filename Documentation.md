@@ -13,10 +13,10 @@ Potter_Programming has 5 diffrent data types
 * #### Numbers - Numbers in Potter_programming are double-precision floating point numbers, stored according to the IEEE 754 standard.
 * #### Boolean - A logical entity having two values either _true_ or _false_. The keywords _a wizard_ for True and _a muggle_ for False are also valid.
 
-`Harry is a wizard  	   lumos Variable called Harry has value True`
+`Harry is a wizard` <br> `lumos Variable called Harry has value True`
 
-`Harry is true             lumos same as above statement, both are valid`
+`Harry is true`        <br>     `lumos same as above statement, both are valid`
 
-`Dudley is a muggle        lumos Variable called Dudley has value false`
+`Dudley is a muggle` <br>        `lumos Variable called Dudley has value false`
 
-`Dudley is false           lumos same as above statement, both are valid`
+`Dudley is false` <br>          `lumos same as above statement, both are valid`
