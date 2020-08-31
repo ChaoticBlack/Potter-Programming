@@ -32,6 +32,15 @@ app.listen(3000, function() {
 app.get('/',function(req,res){
   res.render('home')
 });
+app.get('/documentation',function(req,res){
+  res.render('documentation')
+});
+app.get('/about',function(req,res){
+  res.render('about')
+});
+app.get('/tutorial',function(req,res){
+  res.render('tutorial')
+});
 app.get('/code',function(req,res){
   res.render('index', {output: output, input: input, cin:cin})
 

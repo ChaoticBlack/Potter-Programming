@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Code</title>
-    <link rel="stylesheet" href="/css/style1.css">
-  </head>
-  <body>
-    <h1>HI</h1>
+<%- include("header") -%>
     <form class="" action="/code" method="post">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" cols="80" name="postTitle"><%= input.input1 %></textarea>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="8" cols="80" name="postTitle1"><%= cin.cin1 %></textarea>
+      <h2>Program</h2>
+    <textarea  id="exampleFormControlTextarea1" rows="8" cols="40" name="postTitle"><%= input.input1 %></textarea>
+    <h2>Input</h2>
+    <textarea  id="exampleFormControlTextarea1" rows="4" cols="40" name="postTitle1"><%= cin.cin1 %></textarea>
+    <br>
     <button type="submit" name="button">DONE</button>
+
     </form>
-    <textarea name="name" rows="8" cols="80"><%= output.output1 %></textarea>
-  </body>
-</html>
+    <h2>Output</h2>
+    <textarea  id="exampleFormControlTextarea1" name="name" rows="8" cols="40"><%= output.output1 %></textarea>
+    <%- include("footer") -%>
