@@ -5,7 +5,7 @@ const express=require("express");
 const app=express();
 const { exec } = require("child_process");
 // #!/usr/bin/env node
-const rockstar = require('./src/rockstar');
+const pottercode = require('./src/pottercode');
 const { spawn } = require("child_process");
 var flag=0;
 app.set('view engine', 'ejs');
@@ -32,6 +32,7 @@ app.listen(3000, function() {
 app.get('/',function(req,res){
   res.render('home')
 });
+
 app.get('/documentation',function(req,res){
   res.render('documentation')
 });
@@ -56,27 +57,27 @@ app.post("/code",function(req,res){
   title1 = title1.replace(/(\r\n|\n|\r)/gm, "\n");
   //title1=title1+"\n"
    console.log(title1);
-   fs.writeFile("temp.rock", title1, (err) => {
+   fs.writeFile("program.pc", title1, (err) => {
      if (err) console.log(err);
      console.log("Successfully Written to File.");
    });
-   fs.writeFile("test.txt", title, (err) => {
+   fs.writeFile("input.txt", title, (err) => {
      if (err) console.log(err);
      console.log("Successfully Written to File.");
    });
-   const filename = "temp.rock";
+   const filename = "program.pc";
 
    promisify(fs.readFile, filename, 'utf-8')
-   .then(rockstar.compile)
-   .then(code => promisify(fs.writeFile, filename.replace('.rock', '.js'), code))
-   .then(s =>{var contents = fs.readFileSync('temp.js', 'utf8');
+   .then(pottercode.compile)
+   .then(code => promisify(fs.writeFile, filename.replace('.pc', '.js'), code))
+   .then(s =>{var contents = fs.readFileSync('program.js', 'utf8');
    var start=contents.slice(0,7)
    if(start==="const $")
    {
    var contents1= contents.slice(344)
-   contents1="const fs = require('fs');var x=0;function $readLineSync() {try {const data = fs.readFileSync('test.txt', 'UTF-8');const lines = data.split(/\\" + "r?\\" + "n/);return lines[x++];} catch (err) {console.error(err);}};\n"+contents1;
+   contents1="const fs = require('fs');var x=0;function $readLineSync() {try {const data = fs.readFileSync('input.txt', 'UTF-8');const lines = data.split(/\\" + "r?\\" + "n/);return lines[x++];} catch (err) {console.error(err);}};\n"+contents1;
    console.log(contents1)
-   fs.writeFile("temp.js", contents1, (err) => {
+   fs.writeFile("program.js", contents1, (err) => {
      if (err) console.log(err);
      console.log("Successfully Written to File.");
    });
@@ -94,7 +95,7 @@ app.post("/code",function(req,res){
    })
 
 
-   const ls = spawn("node",["temp.js"] );
+   const ls = spawn("node",["program.js"] );
    var i="";
    ls.stdout.on("data", data => {
        console.log(`${data}`);

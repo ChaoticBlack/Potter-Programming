@@ -6,12 +6,14 @@ https://mkrtchyan.ga
 * {
     margin: 0;
     padding: 0;
-    text-align: center;
+    /* text-align: center; */
     /* background-color: black; */
 }
+
 body{
   text-align: center;
   color: white;
+  height: 100%;
 }
 header {
     background-color:rgba(33, 33, 33, 0.9);
@@ -22,10 +24,13 @@ header {
     position:relative;
     z-index:5;
 }
-
+html
+{
+  height:100%;
+}
 h2{
     /* margin-top: 30px; */
-    text-align: center;
+    /* text-align: center; */
 }
 header h2{
     font-size: 22px;
@@ -80,7 +85,7 @@ header a, a:visited {
   bottom:0;
   width:100%;
   top:0;
-  height:60rem;
+  /* height: 70rem; */
   display:block;
 }
 
@@ -116,6 +121,8 @@ header a, a:visited {
   width: 50%;
   color: white;
   text-align: left;
+  /* border: 2rem; */
+  border-width: thick;
 }
 .navbar-center
 {
@@ -129,4 +136,13 @@ header a, a:visited {
   margin-bottom: 2rem;
   font-size: 1.5rem;
   z-index: 4;
+}
+
+#text
+{
+  text-align: left;
+}
+.text
+{
+  text-align: left;
 }
