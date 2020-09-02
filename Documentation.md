@@ -10,9 +10,9 @@ Whenever Harry was stuck in the dark, 'Lumos' showed him the way! Comments play 
 ### Data Types
 
 Potter_Programming has 5 diffrent data types
-* #### Numbers-
+ #### Numbers-
 Numbers in Potter_programming are double-precision floating point numbers, stored according to the IEEE 754 standard.
-* #### Boolean-
+ #### Boolean-
 A logical entity having two values either _true_ or _false_. The keywords _a wizard_ for True and _a muggle_ for False or directly _true_ or _false_ are valid.
 
 `Harry is a wizard` <br> `lumos Variable called Harry has value True`
@@ -23,10 +23,13 @@ A logical entity having two values either _true_ or _false_. The keywords _a wiz
 
 `Dudley is false` <br>          `lumos same as above statement, both are valid`
 
-* #### String-
+ #### String-
 Potter Lang strings are sequences of 16-bit unsigned integer values representing UTF-16 code units. Anything written in double quotes ("") or singe quotes ('') will be considered a string.
 
-* #### Invisible-
+#### Null-
+Null - the null type. Evaluates as equal to zero and equal to false. 
+
+ #### Invisible-
 This is a fun data type unique to Potter Lang. It is like Harry's Invisibility Cloak! Whatever is assigned _invisible_ has no value. And no, it is not null!
 
 ### Arithematic
@@ -76,3 +79,48 @@ Potter Lang has 4 different logical operators that first convert their operand(s
 * `A or B` returns Disjunction
 * `A nor B` returns Joint Denial
 * `not A` returns the negation of `A`
+
+### Input/Output
+Use the _Listen_ keyword to read one line of input from STDIN. Use _Listen to_ to capture the input into a named variable. 
+
+* `listen to hermione` - read one line of input from STDIN and store it in variable `hermione`
+
+Use the _spell_ keyword to write the value of a variable or string to STDOUT. The keyword _print_ is also valid.
+
+* `spell "Hello World"`
+8 `spell harry`
+
+### Flow Control and Block Syntax
+
+#### Conditionals
+Conditional expressions start with the _If_ keyword, followed by an expression. If the expression evaluates to _true_, then the subsequent code block is executed. Optionally, an _Else_ block can be written after an _If_ block. The code block following the _Else_ keyword would be executed if the _If_ expression evaluated to _false_.
+
+For the purpose of conditional expressions, _0_, _invisible_, _null_, _false_, and the empty string all evaluate to _false_, and everything else to _true_.
+
+#### Loops
+Similar to the _If_ statement, a loop is denoted by the _While_ or _Until_ keyword, which will cause the subsequent code block to be executed repeatedly whilst the expression is satisfied
+
+ `harry is 10` <br>
+ `while harry is ahead of 0`<br>
+`descendio harry`
+
+#### Blocks
+A block in Potter Lang starts with an _If_, _Else_, _While_ or _Until_ statement, and is terminated by a blank line or the end-of-file. EOF ends all open code blocks.
+
+### Functions
+Functions are declared with a variable name followed by the _takes_ keyword and a list of arguments separated by _and_
+
+`Multiply takes X and Y`
+
+The function body is a list of statements with no separating blank lines. A blank line denotes the end of a function body. Functions in Potter Lang always have a return value, indicated by the _Give back_ keyword.
+
+Functions are called using the _accio_ keyword and must have at least one argument. Multiple arguments are separated with _and_.
+
+`multiply takes X and Y` <br>
+`give back X gemino Y` <br>
+` ` <br>
+`ans accio 2 and 4`
+
+
+
+
