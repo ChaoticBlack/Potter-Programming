@@ -9,6 +9,7 @@ body
    background-image: url('https://wallpapercave.com/wp/sR5I9K3.jpg');
    background-size: 100% 100%;
    background-repeat: no-repeat;
+  background-attachment: fixed;
   /*opacity: 0.4;
     filter: alpha(opacity=40); /* For IE8 and earlier */
     /* background-size: cover; */

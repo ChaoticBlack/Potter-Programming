@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Potter Programming</title>
+      <link rel="icon" href="img/logo1.png">
+    <title>PotterCode</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Rowdies&display=swap" rel="stylesheet">
     <!-- Google Fonts -->
@@ -24,8 +25,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+
   </head>
   <body>
+    <audio id="my_audio" src="audio/titlesong.mpeg"></audio>
+    <script type="text/javascript">
+    window.onload = function() {
+  document.getElementById("my_audio").play();
+}
+    </script>
     <div class="home1">
       <div class="home">
     <h1 class="title1 ">
@@ -54,10 +62,10 @@
          <div class="footer">
           <div class="row">
             <div class="col-md-6">
-              <button type="button" class="btn btn-outline-light button "><a class="nav-link button "  href="/code">Code</a></button>
+              <a class="nav-link button "  href="/code"><button type="button" class="btn btn-outline-light button ">Code</button></a>
             </div>
             <div class="col-md-6">
-              <button type="button" class="btn btn-outline-light button "><a class="nav-link button" href="/documentation">DOCS</button>
+              <a class="nav-link button" href="/documentation"><button type="button" class="btn btn-outline-light button ">DOCS</button></a>
             </div>
           </div>
 

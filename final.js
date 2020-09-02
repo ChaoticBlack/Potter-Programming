@@ -32,6 +32,9 @@ app.listen(3000, function() {
 app.get('/',function(req,res){
   res.render('home')
 });
+app.get('/example',function(req,res){
+  res.render('example')
+});
 
 app.get('/documentation',function(req,res){
   res.render('documentation')
