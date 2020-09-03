@@ -5,7 +5,7 @@ const express=require("express");
 const app=express();
 const { exec } = require("child_process");
 // #!/usr/bin/env node
-const pottercode = require('./src/pottercode');
+const pottercode = require(__dirname+'/src/pottercode');
 const { spawn } = require("child_process");
 var flag=0;
 app.set('view engine', 'ejs');
@@ -24,7 +24,7 @@ const cin={
   cin1:null
 };
 
-app.listen(3000, function() {
+app.listen(process.env.PORT ||3000, function() {
   console.log("Server started on port 3000");
 });
 
@@ -60,27 +60,27 @@ app.post("/code",function(req,res){
   title1 = title1.replace(/(\r\n|\n|\r)/gm, "\n");
   //title1=title1+"\n"
    console.log(title1);
-   fs.writeFile("program.pc", title1, (err) => {
+   fs.writeFile(__dirname+"/program.pc", title1, (err) => {
      if (err) console.log(err);
      console.log("Successfully Written to File.");
    });
-   fs.writeFile("input.txt", title, (err) => {
+   fs.writeFile(__dirname+"/input.txt", title, (err) => {
      if (err) console.log(err);
      console.log("Successfully Written to File.");
    });
-   const filename = "program.pc";
+   const filename =__dirname +"/program.pc";
 
    promisify(fs.readFile, filename, 'utf-8')
    .then(pottercode.compile)
    .then(code => promisify(fs.writeFile, filename.replace('.pc', '.js'), code))
-   .then(s =>{var contents = fs.readFileSync('program.js', 'utf8');
+   .then(s =>{var contents = fs.readFileSync(__dirname+'/program.js', 'utf8');
    var start=contents.slice(0,7)
    if(start==="const $")
    {
    var contents1= contents.slice(344)
    contents1="const fs = require('fs');var x=0;function $readLineSync() {try {const data = fs.readFileSync('input.txt', 'UTF-8');const lines = data.split(/\\" + "r?\\" + "n/);return lines[x++];} catch (err) {console.error(err);}};\n"+contents1;
    console.log(contents1)
-   fs.writeFile("program.js", contents1, (err) => {
+   fs.writeFile(__dirname+"/program.js", contents1, (err) => {
      if (err) console.log(err);
      console.log("Successfully Written to File.");
    });
