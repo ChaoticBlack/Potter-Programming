@@ -1,4 +1,4 @@
-const parser = require('./pottercode-parser')
+const parser = require(__dirname+'/pottercode-parser')
 
 let it
 const generators = {
