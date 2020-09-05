@@ -86,7 +86,7 @@ Loop = c:('While'i/'Until'i) _ e:Expression
 Continue = ('Continue'i) {return {t: 'Continue'}}
 Break = ('Break'i / 'immobulous'i) {return {t: 'Break'}}
 
-FunctionDeclaration =('horcrux'i/'def') _ n:Variable _ 'takes'i _ a:FunctionDeclarationArguments
+FunctionDeclaration =('horcrux'i/'def') _ n:Variable _* '(' _*  a:FunctionDeclarationArguments _* ')'
 	{ return {t: 'FunctionDeclaration', n, a: a.map(a => a.n)} }
 FunctionDeclarationArguments =
 	a:Variable (_'and'i_ / _?','_?) b:FunctionDeclarationArguments { return [a].concat(b) }
@@ -96,7 +96,7 @@ GiveBack = ('Give back'i/'return') _ e:Expression
 BlankLine = '' {return {t: 'BlankLine'}}
 
 
-FunctionCall = 'accio'_ f:Variable _ '('  a:FunctionCallArguments ')'
+FunctionCall = 'accio'_ f:Variable _* '('  a:FunctionCallArguments ')'
 	{ return {t: 'FunctionCall', f, a} }
 
 FunctionCallArguments =
