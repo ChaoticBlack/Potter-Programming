@@ -1,0 +1,125 @@
+Program = Statement *
+Statement = _? s:(FunctionDeclaration/Operation/BlankLine) ','? _* '\n' {return s}
+Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put / Listen / Say / Continue / Break / PoeticString
+whitespace= [ \t]
+_           = (whitespace/comment)+
+comment     = 'lumos'i _ (all_char / all_symbol)* //{return null}
+all_char = [a-zA-Z0-9 ]
+all_symbol = [!/@#$%^&*()-_+=.<>,]
+
+Variable =
+	(n:(CommonVariable / ProperVariable/simple_variable) {return {t: 'Variable', n}})
+//	/ Pronoun {return {t: 'Pronoun'}}
+simple_variable= $[a-zA-Z]+
+CommonVariable = p:('the'i/'my'i/'your'i) _ v:$([a-z]+) {return p+v}
+ProperWord = ([A-Z][A-Za-z]+)
+ProperVariable = $(ProperWord _ ProperVariable) / $ProperWord
+//Pronoun = (
+//	'it'i
+//	/'he'i/'she'i/'him'i/'her'i
+//	/'them'i/'they'i
+//	/'ze'i/'hir'i/'zie'i/'zir'i/'xe'i/'xem'i/'ve'i/'ver'i
+//)
+
+TypeLiteral = v:TypeLiteralValue { return {t: 'Literal', v} }
+TypeLiteralValue =
+	('nothing'i/'nox'i) {return 0} // TODO null?
+	/ ('true'i/'a wizard'i) {return true}
+    / ('false'i/'a muggle'i) {return false}
+    / 'invisible'i { return undefined}
+
+String = '"' v:$[^"]+ '"'
+	{ return {t: 'Literal', v}}
+
+Number = n:$([0-9]+ ('.' [0-9]+)?)
+	{ return {t: 'Literal', v: parseFloat(n)} }
+
+ArithmeticStatement = BuildUp / KnockDown
+BuildUp = ('++'/'ascendio'i) _ v:Variable
+	{ return {t: 'Rement', v: v, o: '++'} }
+KnockDown = '--'/'descendio'i _ v:Variable
+	{ return {t: 'Rement', v: v, o: '--'} }
+
+PoeticString = v:Variable _ 'says' ' ' t:$[^\n]*
+	{ return {t: 'Set', v: v, e: {t: 'Literal', v: t}} }
+
+PoeticNumber = n:PoeticDigits d:PoeticDecimal? {return {t: 'Literal', v: parseFloat(d?n+'.'+d:n)}}
+PoeticDecimal = '.' _ d:PoeticDigits {return d}
+PoeticDigits =
+	l:PoeticDigit ( _ / [\',;:?!] )+ r:PoeticDigits { return l+r }
+	/ d: PoeticDigit { return d }
+PoeticDigit = t:[A-Za-z]+ {return (t.length%10).toString()}
+
+ArithmeticExpression =
+	l:SimpleExpression
+	_ o:ArithmeticOperator _
+	r:SimpleExpression
+	{ return {t: 'Arithmetic', l, o, r} }
+ArithmeticOperator =
+	('reducio'i/'-') {return '-'}
+	/ ('engorgio'i/'+') {return '+'}
+	/ ('gemino'i/'*') {return '*'}
+	/ ('sectumsepra'i/'/') {return '/'}
+
+Comparison = l:SimpleExpression _ b:BoolCheck c:Comparator? r:SimpleExpression
+	{ return {t: 'Comparison', l, r, b, c} }
+BoolCheck =
+	(('is'i_'not'i_)/"ain't"i_/ '!=') { return false }
+	/ 'is'_ { return true }
+Comparator =
+	(('ahead'i)_'of'i_/'>') { return 'gt' }
+    / ('behind'/'<') { return 'lt' }
+    / ('as'i_('high'i/'great'i/'big'i/'strong'i)_'as'i_/'>=') {return 'ge'}
+    / ('as'i_('low'i/'little'i/'small'i/'weak'i)_'as'i_/'<=') {return 'le'}
+
+Listen = 'Listen'i _ 'to'i _ v:Variable
+	{return {t:'Listen', v}}
+Say = ('Spell'i/'print'i) _ e:Expression
+	{return {t:'Say', e}}
+
+If = 'If'i _ e:Expression
+	{ return {t: 'If', e} }
+Else = 'Else'i {return {t: 'Else'}}
+
+Loop = c:('While'i/'Until'i) _ e:Expression
+	{ return {t: 'Loop', c, e} }
+Continue = ('Continue'i) {return {t: 'Continue'}}
+Break = ('Break'i / 'immobulous'i) {return {t: 'Break'}}
+
+FunctionDeclaration =('horcrux'i/'def') _ n:Variable _ 'takes'i _ a:FunctionDeclarationArguments
+	{ return {t: 'FunctionDeclaration', n, a: a.map(a => a.n)} }
+FunctionDeclarationArguments =
+	a:Variable (_'and'i_ / _?','_?) b:FunctionDeclarationArguments { return [a].concat(b) }
+    / a:Variable { return [a] }
+GiveBack = ('Give back'i/'return') _ e:Expression
+	{ return {t: 'GiveBack', e} }
+BlankLine = '' {return {t: 'BlankLine'}}
+
+
+FunctionCall = 'accio'_ f:Variable _ '('  a:FunctionCallArguments ')'
+	{ return {t: 'FunctionCall', f, a} }
+
+FunctionCallArguments =
+	a:SimpleExpression (_'and'i_ / _?','_?) b:FunctionCallArguments { return [a].concat(b) }
+    / a:SimpleExpression { return [a] }
+
+
+Expression = ArithmeticExpression / BooleanOperation
+SimpleExpression = FunctionCall / TypeLiteral / Variable / Number / String / PoeticNumber
+BooleanOperation =
+	(
+    	l:(Comparison / SimpleExpression)
+        _ b:('and'i/'or'i) _
+        r:Expression
+        { return {t: 'BooleanOperation', l, b, r} }
+    )
+    / l: (Comparison / SimpleExpression) { return l }
+
+Set = v:Variable _ ('is'i/'was'i/'were'i/ '=') _ e:Expression
+	{ return {t: 'Set', v: v, e} }
+int_assignment = e:Expression _ 'points to'i _ v:Variable
+	{return{t: 'Set', v: v, e} }
+int = [0-9]+
+Put = e:Expression _ 'points to'i _ v:Variable
+	{ return {t: 'Set', v: v, e} }
+	
