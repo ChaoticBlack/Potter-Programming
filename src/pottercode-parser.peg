@@ -72,7 +72,7 @@ Comparator =
     / ('as'i_('high'i/'great'i/'big'i/'strong'i)_'as'i_/'>=') {return 'ge'}
     / ('as'i_('low'i/'little'i/'small'i/'weak'i)_'as'i_/'<=') {return 'le'}
 
-Listen = 'Listen'i _ 'to'i _ v:Variable
+Listen = 'sonorous'i / 'input' _ v:Variable
 	{return {t:'Listen', v}}
 Say = ('Spell'i/'print'i) _ e:Expression
 	{return {t:'Say', e}}
@@ -96,7 +96,7 @@ GiveBack = ('Give back'i/'return') _ e:Expression
 BlankLine = '' {return {t: 'BlankLine'}}
 
 
-FunctionCall = 'accio'_ f:Variable _* '('  a:FunctionCallArguments ')'
+FunctionCall = 'accio'_ f:Variable _* '(' _*  a:FunctionCallArguments _*')'
 	{ return {t: 'FunctionCall', f, a} }
 
 FunctionCallArguments =
