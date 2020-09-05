@@ -91,7 +91,7 @@ FunctionDeclaration =('horcrux'i/'def') _ n:Variable _* '(' _*  a:FunctionDeclar
 FunctionDeclarationArguments =
 	a:Variable (_'and'i_ / _?','_?) b:FunctionDeclarationArguments { return [a].concat(b) }
     / a:Variable { return [a] }
-GiveBack = ('Give back'i/'return') _ e:Expression
+GiveBack = ('depulso'i/'return') _ e:Expression
 	{ return {t: 'GiveBack', e} }
 BlankLine = '' {return {t: 'BlankLine'}}
 
