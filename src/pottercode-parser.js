@@ -334,8 +334,8 @@ module.exports = /*
         peg$c190 = peg$literalExpectation("and", true),
         peg$c191 = function(a, b) { return [a].concat(b) },
         peg$c192 = function(a) { return [a] },
-        peg$c193 = "give back",
-        peg$c194 = peg$literalExpectation("Give back", true),
+        peg$c193 = "depulso",
+        peg$c194 = peg$literalExpectation("depulso", true),
         peg$c195 = "return",
         peg$c196 = peg$literalExpectation("return", false),
         peg$c197 = function(e) { return {t: 'GiveBack', e} },
@@ -2590,9 +2590,9 @@ module.exports = /*
       var s0, s1, s2, s3;
 
       s0 = peg$currPos;
-      if (input.substr(peg$currPos, 9).toLowerCase() === peg$c193) {
-        s1 = input.substr(peg$currPos, 9);
-        peg$currPos += 9;
+      if (input.substr(peg$currPos, 7).toLowerCase() === peg$c193) {
+        s1 = input.substr(peg$currPos, 7);
+        peg$currPos += 7;
       } else {
         s1 = peg$FAILED;
         if (peg$silentFails === 0) { peg$fail(peg$c194); }
