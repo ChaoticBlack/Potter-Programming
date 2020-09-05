@@ -120,7 +120,7 @@ The keyword for declaring a function is `horcrux` followed by the function name 
 
 Did you get why we used `horcrux`? Because just like a Horcrux contains a part of the soul, a function contains part of the program! But unlike your soul, you can divide the program into as many parts as you like ;-) 
 
-`horcrux nultiply (X,Y)`
+`horcrux multiply (X,Y)`
 
 The function body is a list of statements with no separating blank lines. A blank line denotes the end of a function body. Functions in PotterCode always have a return value, indicated by the `depulso` keyword. Depulso is the banishing charm, antonym of accio!
 
@@ -128,7 +128,7 @@ The keyword `return` also works.
 
 Functions are called using (you guessed it!) the `accio` keyword followed by the function name and function arguments(At least one argument is compulsory) in parenthesis. Multiple arguments are separated with `and` or commas.
 
-`horcrux nultiply (X,Y)` <br>
+`horcrux multiply (X,Y)` <br>
 `depulso X gemino Y` <br>
 ` ` <br>
 `ans is accio multiply(2,4)`
