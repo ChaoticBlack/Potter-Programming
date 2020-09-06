@@ -27,11 +27,11 @@
   </head>
   <body>
 
-    <div class="stars" style="height:230rem;"></div>
-<div class="twinkling" style="height:230rem;">
+    <div class="stars" style="height:270rem;"></div>
+<div class="twinkling" style="height:270rem;">
 
   </div>
-  <div class="clouds" style="height:230rem;">
+  <div class="clouds" style="height:270rem;">
     <a href="/" class="title"><img src="img/logo1.png" alt="" style="height:7rem;"></a>
     <h1 class="title">PotterCode</h1>
     <div class="container">
@@ -65,29 +65,40 @@
 <div id="text" >
   <div class="text">
 
-          <div id="readme" class="container" ><article class="markdown-body entry-content"><p>Potter Lang is a dynamically typed, turing complete programming language inspired by the Harry Potter Universe.</p>
+          <div id="readme" class="container" ><article class="markdown-body entry-content"><p>PotterCode is a dynamically typed, turing complete programming language inspired by the Harry Potter Universe, developed for the DelhiHacks Hackathon! Creeating a language is a huge task and I still cannot believe we accomplished so much.
+          PotterCode is still under development and a lot of functionalities are still to be added. There probably are a lot of bugs too, but under the given time limit, this was the best we could do and i&apos;m proud of my team!</p>
           <h3 id="comments">Comments</h3>
-          <p>Whenever Harry was stuck in the dark, &apos;Lumos&apos; showed him the way! Comments play the same role in Potter_Programming. Comments are followed by the keyword <em>lumos</em></p>
+          <p>Whenever Harry was stuck in the dark, &apos;Lumos&apos; showed him the way! Comments play the same role in PotterCode. Comments are followed by the keyword <code>lumos</code></p>
           <p><code>lumos this is a comment</code></p>
+          <h3 id="input-output">Input/Output</h3>
+          <p>To take input from the user, simply <code>listen to</code> them! The <code>Listen to</code> keyword takes input from STDIN and stores it in a variable. <code>Input</code> keyword is also valid.</p>
+          <ul>
+          <li><code>listen to hermione</code> - read one line of input from STDIN and store it in variable <code>hermione</code></li>
+          </ul>
+          <p>Use the <code>spell</code> keyword to write the value of a variable or string to STDOUT. The keyword <code>print</code> is also valid.</p>
+          <ul>
+          <li><code>spell &quot;Hello World&quot;</code></li>
+          <li><code>spell harry</code></li>
+          </ul>
           <h3 id="data-types">Data Types</h3>
-          <p>Potter_Programming has 5 diffrent data types</p>
+          <p>PotterCode has 5 diffrent data types</p>
           <h4 id="numbers-">Numbers-</h4>
-          <p>Numbers in Potter_programming are double-precision floating point numbers, stored according to the IEEE 754 standard.</p>
+          <p>Numbers in PotterCode are double-precision floating point numbers, stored according to the IEEE 754 standard.(It means that they can be bigger than the points Dumbledore awards to Gryffindor ;-)</p>
           <h4 id="boolean-">Boolean-</h4>
-          <p>A logical entity having two values either <em>true</em> or <em>false</em>. The keywords <em>a wizard</em> for True and <em>a muggle</em> for False or directly <em>true</em> or <em>false</em> are valid.</p>
+          <p>A logical entity having two values either <em>true</em> or <em>false</em>. We obviously assigned wizards as true, and muggles as false ;-D The keywords <code>a wizard</code> for True and <code>a muggle</code> for False or directly <code>true</code> or <code>false</code> are valid.</p>
           <p><code>Harry is a wizard</code> <br> <code>lumos Variable called Harry has value True</code></p>
           <p><code>Harry is true</code>        <br>     <code>lumos same as above statement, both are valid</code></p>
           <p><code>Dudley is a muggle</code> <br>        <code>lumos Variable called Dudley has value false</code></p>
           <p><code>Dudley is false</code> <br>          <code>lumos same as above statement, both are valid</code></p>
           <h4 id="string-">String-</h4>
-          <p>Potter Lang strings are sequences of 16-bit unsigned integer values representing UTF-16 code units. Anything written in double quotes (&quot;&quot;) or singe quotes (&apos;&apos;) will be considered a string.</p>
+          <p>PotterCode strings are sequences of 16-bit unsigned integer values representing UTF-16 code units. Anything written in double quotes (&quot;&quot;) be considered a string.</p>
           <h4 id="null-">Null-</h4>
           <p>Null - the null type. Evaluates as equal to zero and equal to false.</p>
           <h4 id="invisible-">Invisible-</h4>
-          <p>This is a fun data type unique to Potter Lang. It is like Harry&apos;s Invisibility Cloak! Whatever is assigned <em>invisible</em> has no value. And no, it is not null!</p>
+          <p>This is a fun data type unique to PotterCode. It is like Harry&apos;s Invisibility Cloak! Whatever is assigned <code>invisible</code> has no value. And no, it is not null!</p>
           <h3 id="arithematic">Arithematic</h3>
           <h4 id="operators">Operators</h4>
-          <p>Addition takes place between two numbers and the result is equated to a number.</p>
+          <p>Addition takes place between two numbers and the result is equated to a number. Same is valid for all the basic operations.</p>
           <table>
           <thead>
           <tr>
@@ -143,59 +154,54 @@
           </tr>
           </tbody></table>
           <h4 id="increment-and-decrement-">Increment and Decrement -</h4>
-          <p>The keyword for incrementing a number by 1 is <em>ascendio</em>. The common syntax of other languages <em>++</em> also works.</p>
-          <p>The keyword for decrementing a number by 1 is <em>descendio</em>. The common syntax of other languges <em>--</em> also works.</p>
+          <p>The keyword for incrementing a number by 1 is <code>ascendio</code>. The common syntax of other languages <code>++</code> also works.</p>
+          <p>The keyword for decrementing a number by 1 is <code>descendio</code>. The common syntax of other languges <code>--</code> also works.</p>
           <p><code>100 points to gryffindor</code> <br> <code>ascendio gryffindor</code> <br> <code>descendio gryffindor</code></p>
           <h4 id="comparision">Comparision</h4>
-          <p>Similar to the single-equals operator in Visual Basic and some scripting languages, the <em>is</em> keyword in Potter Lang is interpreted differently depending whether it appears as part of a statement or as part of an expression. <em>isn&apos;t</em> is the logical negation of the <em>is</em> keyword.</p>
-          <p>Comparison in Potter Lang can only be done within an expression.</p>
+          <p>Similar to the single-equals operator in Visual Basic and some scripting languages, the <code>is</code> keyword in PotterCode is interpreted differently depending whether it appears as part of a statement or as part of an expression. <code>isn&apos;t</code> is the logical negation of the <code>is</code> keyword.</p>
+          <p>Comparison in PotterCode can only be done within an expression.</p>
           <p><code>dobby is free</code> initialises the variable <code>doobby</code> with the value  of <code>free</code>.</p>
           <p><code>If dobby is free</code> - will execute the following block if, and only if, the variable <code>dobby</code> is equal to <code>free</code></p>
-          <p>Potter Lang supports the following comparision syntax:</p>
+          <p>PotterCode supports the following comparision syntax:</p>
           <ul>
           <li><code>is ahead of</code> or <code>&gt;</code> denotes &apos;greater than&apos;</li>
           <li><code>is behind</code> or <code>&lt;</code> denotes &apos;less than&apos;</li>
           <li><code>is as high/great/big/strong as</code> or <code>&gt;=</code> denotes greater than equal to</li>
           <li><code>is as low/little/small/weak as</code> or &lt;= denotes less than equal to</li>
           </ul>
+          <p>This syntax is just like English, easy to remember!</p>
           <h4 id="logical-operators">Logical Operators</h4>
-          <p>Potter Lang has 4 different logical operators that first convert their operand(s) to a boolean.</p>
+          <p>PotterCode has 4 different logical operators that first convert their operand(s) to a boolean.</p>
           <ul>
           <li><code>A and B</code> returns the Conjunction</li>
           <li><code>A or B</code> returns Disjunction</li>
           <li><code>A nor B</code> returns Joint Denial</li>
           <li><code>not A</code> returns the negation of <code>A</code></li>
           </ul>
-          <h3 id="input-output">Input/Output</h3>
-          <p>Use the <em>Listen</em> keyword to read one line of input from STDIN. Use <em>Listen to</em> to capture the input into a named variable.</p>
-          <ul>
-          <li><code>listen to hermione</code> - read one line of input from STDIN and store it in variable <code>hermione</code></li>
-          </ul>
-          <p>Use the <em>spell</em> keyword to write the value of a variable or string to STDOUT. The keyword <em>print</em> is also valid.</p>
-          <ul>
-          <li><code>spell &quot;Hello World&quot;</code>
-          8 <code>spell harry</code></li>
-          </ul>
           <h3 id="flow-control-and-block-syntax">Flow Control and Block Syntax</h3>
+          <p>To keep things simple, PotterCode doesn&apos;t use parenthesis or even indentations. Rather it breaks the program into blocks. You just leave a line after every conditional or loop and that&apos;s it! Pretty nifty right!</p>
           <h4 id="conditionals">Conditionals</h4>
-          <p>Conditional expressions start with the <em>If</em> keyword, followed by an expression. If the expression evaluates to <em>true</em>, then the subsequent code block is executed. Optionally, an <em>Else</em> block can be written after an <em>If</em> block. The code block following the <em>Else</em> keyword would be executed if the <em>If</em> expression evaluated to <em>false</em>.</p>
+          <p>Conditional expressions start with the <code>If</code> keyword, followed by an expression. If the expression evaluates to true, then the subsequent code block is executed. Optionally, an <code>Else</code> block can be written after an <code>If</code> block. The code block following the <code>Else</code> keyword would be executed if the <code>If</code> expression evaluated to false.</p>
           <p>For the purpose of conditional expressions, <em>0_, _invisible</em>, <em>null</em>, <em>false</em>, and the empty string all evaluate to <em>false</em>, and everything else to <em>true</em>.</p>
           <h4 id="loops">Loops</h4>
-          <p>Similar to the <em>If</em> statement, a loop is denoted by the <em>While</em> or <em>Until</em> keyword, which will cause the subsequent code block to be executed repeatedly whilst the expression is satisfied</p>
+          <p>Similar to the <code>If</code> statement, a loop is denoted by the <code>While</code> or <code>Until</code> keyword, which will cause the subsequent code block to be executed repeatedly whilst the expression is satisfied</p>
           <p> <code>harry is 10</code> <br>
            <code>while harry is ahead of 0</code><br>
           <code>descendio harry</code></p>
           <h4 id="blocks">Blocks</h4>
-          <p>A block in Potter Lang starts with an <em>If</em>, <em>Else</em>, <em>While</em> or <em>Until</em> statement, and is terminated by a blank line or the end-of-file. EOF ends all open code blocks.</p>
+          <p>A block in PotterCode starts with an <code>If</code>, <code>Else</code>, <code>While</code> or <code>Until</code> statement, and is terminated by a blank line or the end-of-file. EOF ends all open code blocks. So please remember to leave a line after <strong>Conditionals</strong>, <strong>Loops</strong> and <strong>Functions</strong> (explained below).</p>
           <h3 id="functions">Functions</h3>
-          <p>Functions are declared with a variable name followed by the <em>takes</em> keyword and a list of arguments separated by <em>and</em></p>
-          <p><code>Multiply takes X and Y</code></p>
-          <p>The function body is a list of statements with no separating blank lines. A blank line denotes the end of a function body. Functions in Potter Lang always have a return value, indicated by the <em>Give back</em> keyword.</p>
-          <p>Functions are called using the <em>accio</em> keyword and must have at least one argument. Multiple arguments are separated with <em>and</em>.</p>
-          <p><code>multiply takes X and Y</code> <br>
-          <code>give back X gemino Y</code> <br>
+          <p>The keyword for declaring a function is <code>horcrux</code> followed by the function name and its parameters in parenthesis. The keyword <code>def</code> also works in the place of <code>horcrux</code> .</p>
+          <p>Did you get why we used <code>horcrux</code>? Because just like a Horcrux contains a part of the soul, a function contains part of the program! But unlike your soul, you can divide the program into as many parts as you like ;-)</p>
+          <p><code>horcrux multiply (X,Y)</code></p>
+          <p>The function body is a list of statements with no separating blank lines. A blank line denotes the end of a function body. Functions in PotterCode always have a return value, indicated by the <code>depulso</code> keyword. Depulso is the banishing charm, antonym of accio!</p>
+          <p>The keyword <code>return</code> also works.</p>
+          <p>Functions are called using (you guessed it!) the <code>accio</code> keyword followed by the function name and function arguments(At least one argument is compulsory) in parenthesis. Multiple arguments are separated with <code>and</code> or commas.</p>
+          <p><code>horcrux multiply (X,Y)</code> <br>
+          <code>depulso X gemino Y</code> <br>
           <code></code> <br>
-          <code>ans accio 2 and 4</code></p>
+          <code>ans is accio multiply(2,4)</code>
+          <br></p>
           </article></div><div style="background-color: #b4b2b2;width: 50px;height:50px;line-height: 50px;text-align: center;position: fixed;bottom: 10px;right: 10px;padding-top:5px;" onclick="document.documentElement.scrollTop = document.body.scrollTop =0;">
             <svg t="1533629773982" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1035" xlink="http://www.w3.org/1999/xlink" width="40" height="40"><defs><style type="text/css">@font-face { font-family: uc-nexus-iconfont; src: url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.woff") format("woff"), url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.ttf") format("truetype"); }
             </style></defs><path d="M536.255427 195.182354c-7.804756-7.804756-17.966187-11.615549-28.311813-11.615549-9.43693 0-18.874883 3.449565-26.496467 10.163477-2.360767 1.452071-4.356214 3.267417-6.352685 5.262864L218.47792 455.611735c-15.607466 15.60542-15.607466 40.834011 0 56.43943 15.607466 15.607466 41.558511 15.607466 57.167001 0l193.46013-192.733583 0 600.526219c0 22.1423 17.787108 39.927361 39.927361 39.927361 22.140253 0 39.927361-17.785062 39.927361-39.927361L548.959773 319.317583 737.15704 508.422522c15.607466 15.607466 40.469714 15.607466 56.078203 0 15.607466-15.607466 15.425318-40.834011-0.182149-56.441477L536.255427 195.182354 536.255427 195.182354z" p-id="1036" fill="#333"/><path d="M101.784174 143.097092l816.674071 0c22.140253 0 39.925315-17.785062 39.925315-39.927361 0-22.140253-17.784038-39.925315-39.925315-39.925315L101.784174 63.244416c-22.140253 0-39.927361 17.785062-39.927361 39.925315C61.856813 125.31203 79.643921 143.097092 101.784174 143.097092L101.784174 143.097092z" p-id="1037" fill="#333"/></svg>
