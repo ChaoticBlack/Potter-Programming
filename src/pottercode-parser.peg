@@ -1,6 +1,6 @@
 Program = Statement *
 Statement = _? s:(FunctionDeclaration/Operation/BlankLine) ','? _* '\n' {return s}
-Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put / Listen / Say / Continue / Break / PoeticString
+Operation = Loop / If / ArithmeticStatement / GiveBack / Set / Put /Listen1/ Listen / Say / Continue / Break / PoeticString
 whitespace= [ \t]
 _           = (whitespace/comment)+
 comment     = 'lumos'i _ (all_char / all_symbol)* //{return null}
@@ -72,8 +72,10 @@ Comparator =
     / ('as'i_('high'i/'great'i/'big'i/'strong'i)_'as'i_/'>=') {return 'ge'}
     / ('as'i_('low'i/'little'i/'small'i/'weak'i)_'as'i_/'<=') {return 'le'}
 
-Listen = 'sonorous'i / 'input' _ v:Variable
+Listen =   'input' _ v:Variable
 	{return {t:'Listen', v}}
+Listen1 = 'listen to'i_ v:Variable
+	{return{t:'Listen', v}}
 Say = ('Spell'i/'print'i) _ e:Expression
 	{return {t:'Say', e}}
 
