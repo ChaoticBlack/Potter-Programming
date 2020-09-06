@@ -10,9 +10,9 @@ Whenever Harry was stuck in the dark, 'Lumos' showed him the way! Comments play 
 `lumos this is a comment`
 
 ### Input/Output
-Professor Dumbledore uses 'Sonorous' spell so that all of Hogwarts can hear him! Use the `sonorous` keyword to take input from (Listen to) the user and store it in a variable. `Input` keyword is also valid. 
+To take input from the user, simply `listen to` them! The `Listen to` keyword takes input from STDIN and stores it in a variable. `Input` keyword is also valid. 
 
-* `sonorous hermione` - read one line of input from STDIN and store it in variable `hermione`
+* `listen to hermione` - read one line of input from STDIN and store it in variable `hermione`
 
 Use the `spell` keyword to write the value of a variable or string to STDOUT. The keyword `print` is also valid.
 
