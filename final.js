@@ -78,7 +78,7 @@ app.post("/code",function(req,res){
    if(start==="const $")
    {
    var contents1= contents.slice(344)
-   contents1="const fs = require('fs');var x=0;function $readLineSync() {try {const data = fs.readFileSync('input.txt', 'UTF-8');const lines = data.split(/\\" + "r?\\" + "n/);return lines[x++];} catch (err) {console.error(err);}};\n"+contents1;
+   contents1="const fs = require('fs');var x=0;function $readLineSync() {try {const data = fs.readFileSync('input.txt', 'UTF-8');const lines = data.split(/\\" + "r?\\" + "n/);var m=parseFloat(lines[x]);if(m==lines[x]){x++;return m};return lines[x++];} catch (err) {console.error(err);}};\n"+contents1;
    console.log(contents1)
    fs.writeFile(__dirname+"/program.js", contents1, (err) => {
      if (err) console.log(err);
